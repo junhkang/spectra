@@ -1,6 +1,6 @@
-
-# Spectra
-
+<p align="center">
+  <img src="https://github.com/junhkang/spectra/assets/20232155/545cac07-540d-446d-b9c0-b92daa3221c9" alt="spectra" width="200">
+</p>
 <p align="right">
   <a href="/localization/en"><img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" width="30"></a>
   <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" width="30"></a>
