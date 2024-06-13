@@ -27,13 +27,6 @@ Spectra is a comprehensive database dashboard application built with Spring Boot
    ```bash
    git clone https://github.com/junhkang/spectra.git
    cd spectra
-
-## 설치
-
-1. 리포지토리를 클론합니다:
-   ```bash
-   git clone https://github.com/junhkang/spectra.git
-   cd spectra
    ```
 
 2. Build and run the application:
