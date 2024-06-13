@@ -26,6 +26,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sohyunLee0517",
+      "name": "sohyun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59640027?v=4",
+      "profile": "https://github.com/sohyunLee0517",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "angular"
