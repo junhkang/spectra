@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spectra Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Spectra</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><a class="nav-link" href="#">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Tables</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Indexes</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Queries</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Security</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- 요약 패널 -->
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Database Status</div>
+                <div class="card-body">
+                    <h5 class="card-title">Uptime</h5>
+                    <p class="card-text" th:text="${dbUptime}">0 days 0 hours</p>
+                    <h5 class="card-title">Connected Users</h5>
+                    <p class="card-text" th:text="${connectedUsers}">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Table Stats</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Tables</h5>
+                    <p class="card-text" th:text="${totalTables}">0</p>
+                    <h5 class="card-title">Total Indexes</h5>
+                    <p class="card-text" th:text="${totalIndexes}">0</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Performance</div>
+                <div class="card-body">
+                    <h5 class="card-title">CPU Usage</h5>
+                    <p class="card-text" th:text="${cpuUsage}">0%</p>
+                    <h5 class="card-title">Memory Usage</h5>
+                    <p class="card-text" th:text="${memoryUsage}">0 MB</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Disk I/O</div>
+                <div class="card-body">
+                    <h5 class="card-title">Disk Read</h5>
+                    <p class="card-text" th:text="${diskRead}">0 MB/s</p>
+                    <h5 class="card-title">Disk Write</h5>
+                    <p class="card-text" th:text="${diskWrite}">0 MB/s</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- 주요 성능 지표 -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Database Capacity</div>
+                <div class="card-body">
+                    <canvas id="dbCapacityChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Table Rows</div>
+                <div class="card-body">
+                    <canvas id="tableRowsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- 인덱스 및 쿼리 분석 -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Unused Indexes</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Index Name</th>
+                            <th>Table Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="index : ${unusedIndexes}">
+                            <td th:text="${index.indexName}">index_name</td>
+                            <td th:text="${index.tableName}">table_name</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">Slow Query Log</div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Query</th>
+                            <th>Execution Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="query : ${slowQueries}">
+                            <td th:text="${query.queryText}">SELECT ...</td>
+                            <td th:text="${query.executionTime}">0 ms</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- 튜닝 가이드 -->
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">Tuning Recommendations</div>
+                <div class="card-body">
+                    <ul>
+                        <li th:each="recommendation : ${indexRecommendations}">
+                            <span th:text="${recommendation}">Index Recommendation</span>
+                        </li>
+                        <li th:each="recommendation : ${queryRecommendations}">
+                            <span th:text="${recommendation}">Query Recommendation</span>
+                        </li>
+                        <li th:each="recommendation : ${structureRecommendations}">
+                            <span th:text="${recommendation}">Structure Recommendation</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script>
+    // Sample data for charts (replace with actual data)
+    const dbCapacityData = {
+        labels: ['Used', 'Free'],
+        datasets: [{
+            label: 'Database Capacity',
+            data: [60, 40],
+            backgroundColor: ['#36a2eb', '#ff6384']
+        }]
+    };
+
+    const tableRowsData = {
+        labels: ['Table1', 'Table2', 'Table3', 'Table4', 'Table5'],
+        datasets: [{
+            label: 'Table Rows',
+            data: [1200, 1500, 800, 600, 900],
+            backgroundColor: '#36a2eb'
+        }]
+    };
+
+    // Initialize charts
+    const dbCapacityCtx = document.getElementById('dbCapacityChart').getContext('2d');
+    const tableRowsCtx = document.getElementById('tableRowsChart').getContext('2d');
+
+    new Chart(dbCapacityCtx, {
+        type: 'pie',
+        data: dbCapacityData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+
+    new Chart(tableRowsCtx, {
+        type: 'bar',
+        data: tableRowsData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
