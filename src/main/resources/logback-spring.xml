@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDDAILY"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>spectra/spectra_log.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="com.example.spectra.config.filter.LogbackFilter" />
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <filter class="com.example.spectra.config.filter.LogbackFilter" />
+		<encoder>
+			<pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] [dd.span_id= %X{dd.span_id}] %-3level %logger{5} - %msg %n</pattern>
+		</encoder>
+	</appender>
+	<logger name="jdbc" level="OFF" />
+	<logger name="jdbc.sqltiming" level="DEBUG"/>
+	<logger name="jdbc.sqlonly" level="WARN" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDDAILY" />
+	</logger>
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="STDDAILY" />
+	</root>
+
+</configuration>
