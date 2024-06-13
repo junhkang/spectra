@@ -55,3 +55,19 @@ Spectra는 Spring Boot와 Thymeleaf로 구축된 포괄적인 데이터베이스
 
 질문, 제안 또는 문제가 있는 경우 [issue tracker](https://github.com/junhkang/spectra/issues)에 새 이슈를 생성하거나 [junhkang91@gmail.com](mailto:junhkang91@gmail.com)으로 연락해 주세요.
 
+## 기여자
+
+이 프로젝트는 다음과 같은 기여자들의 도움으로 이루어졌습니다:
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
