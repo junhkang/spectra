@@ -45,11 +45,11 @@ Spectra는 Spring Boot와 Thymeleaf로 구축된 포괄적인 데이터베이스
 
 ## CONTRIBUTE
 
-기여는 언제나 환영입니다! 참여 방법에 대한 지침은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요.
+기여는 언제나 환영입니다! 참여 방법에 대한 지침은 [CONTRIBUTING.md](/CONTRIBUTING.md)를 참조하세요.
 
 ## LICENSE
 
-이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다 - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다 - 자세한 내용은 [LICENSE](/LICENSE) 파일을 참조하세요.
 
 ## CONTACT
 
