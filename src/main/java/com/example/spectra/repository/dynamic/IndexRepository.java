@@ -1,17 +1,20 @@
 package com.example.spectra.repository.dynamic;
 
-import lombok.Setter;
-import org.apache.ibatis.session.SqlSession;
+import com.example.spectra.config.database.DynamicDataSourceConfig;
+import com.example.spectra.config.database.SqlSessionTemplateAware;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class IndexRepository {
-    @Setter
-    private String namespace;
-    private final SqlSession sqlSession;
-
-    public IndexRepository(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
+public class IndexRepository implements SqlSessionTemplateAware {
+    private SqlSessionTemplate sqlSessionTemplate;
+    @Override
+    public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+        this.sqlSessionTemplate = sqlSessionTemplate;
     }
+    public Integer getTestOne() {
+        return sqlSessionTemplate.selectOne(DynamicDataSourceConfig.getNamespace() + ".IndexMapper.testOne");
+    }
+
 
 }
