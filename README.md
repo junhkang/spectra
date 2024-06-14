@@ -68,6 +68,7 @@ Spectra는 Spring Boot로 구축된 포괄적인 오픈소스 데이터베이스
       <td align="center" valign="top" width="14.28%"><a href="https://junhkang.tistory.com/"><img src="https://avatars.githubusercontent.com/u/20232155?v=4?s=100" width="100px;" alt="Jun Kang"/><br /><sub><b>Jun Kang</b></sub></a><br /><a href="https://github.com/junhkang/spectra/commits?author=junhkang" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SEAN-Leeeee"><img src="https://avatars.githubusercontent.com/u/149139188?v=4?s=100" width="100px;" alt="Sean"/><br /><sub><b>Sean</b></sub></a><br /><a href="https://github.com/junhkang/spectra/commits?author=SEAN-Leeeee" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sohyunLee0517"><img src="https://avatars.githubusercontent.com/u/59640027?v=4?s=100" width="100px;" alt="sohyun"/><br /><sub><b>sohyun</b></sub></a><br /><a href="https://github.com/junhkang/spectra/commits?author=sohyunLee0517" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/movingone"><img src="https://avatars.githubusercontent.com/u/104751794?v=4?s=100" width="100px;" alt="이동원"/><br /><sub><b>이동원</b></sub></a><br /><a href="https://github.com/junhkang/spectra/commits?author=movingone" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

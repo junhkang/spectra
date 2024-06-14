@@ -35,6 +35,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "movingone",
+      "name": "이동원",
+      "avatar_url": "https://avatars.githubusercontent.com/u/104751794?v=4",
+      "profile": "https://github.com/movingone",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "angular"
