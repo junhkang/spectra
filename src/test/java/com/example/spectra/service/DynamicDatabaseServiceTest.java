@@ -19,8 +19,6 @@ public class DynamicDatabaseServiceTest {
 
     @Autowired
     private DynamicDatabaseService dynamicDatabaseService;
-    @InjectMocks
-    private IndexRepository indexRepository;
 
     @Autowired
     private DynamicDataSourceConfig dynamicDataSourceConfig;
@@ -37,7 +35,6 @@ public class DynamicDatabaseServiceTest {
         String namespace = "";
         dynamicDatabaseService.setDynamicDataSource(dbUrl, dbUsername, dbPassword, driverClassName, namespace);
     }
-
     @Test
     @DisplayName("동적 데이터 소스를 성공적으로 바인딩")
     public void shouldSetDynamicDataSourceSuccessfully() throws Exception {
@@ -48,10 +45,8 @@ public class DynamicDatabaseServiceTest {
         String namespace = "testnamespace";
 
         dynamicDatabaseService.setDynamicDataSource(dbUrl, dbUsername, dbPassword, driverClassName, namespace);
-        assertEquals(namespace, DatabaseConfig.getNamespace());
+        assertEquals("com.example.spectra.mapper." + namespace, DynamicDataSourceConfig.getNamespace());
     }
-
-
     @Test
     @DisplayName("testOne 쿼리가 올바른 값을 반환")
     public void testGetTestOne() {
