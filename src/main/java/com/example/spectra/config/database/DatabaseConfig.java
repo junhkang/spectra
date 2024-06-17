@@ -17,10 +17,6 @@ import javax.sql.DataSource;
 @Configuration
 public class DatabaseConfig {
 
-    @Getter
-    @Setter
-    private static String namespace;
-
     @Bean(name = "h2DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.h2")
     public DataSource h2DataSource() {

@@ -1,7 +1,6 @@
 package com.example.spectra.service;
 
 
-import com.example.spectra.config.database.DatabaseConfig;
 import com.example.spectra.config.database.DynamicDataSourceConfig;
 import com.example.spectra.repository.dynamic.IndexRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +19,8 @@ public class DynamicDatabaseServiceTest {
 
     @Autowired
     private DynamicDatabaseService dynamicDatabaseService;
+    @InjectMocks
+    private IndexRepository indexRepository;
 
     @Autowired
     private DynamicDataSourceConfig dynamicDataSourceConfig;
@@ -49,6 +50,7 @@ public class DynamicDatabaseServiceTest {
         dynamicDatabaseService.setDynamicDataSource(dbUrl, dbUsername, dbPassword, driverClassName, namespace);
         assertEquals(namespace, DatabaseConfig.getNamespace());
     }
+
 
     @Test
     @DisplayName("testOne 쿼리가 올바른 값을 반환")
