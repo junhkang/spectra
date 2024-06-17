@@ -19,7 +19,7 @@
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 	    <filter class="com.example.spectra.config.filter.LogbackFilter" />
 		<encoder>
-			<pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] [dd.span_id= %X{dd.span_id}] %-3level %logger{5} - %msg %n</pattern>
+			<pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-3level %logger{5} - %msg %n</pattern>
 		</encoder>
 	</appender>
 	<logger name="jdbc" level="OFF" />
