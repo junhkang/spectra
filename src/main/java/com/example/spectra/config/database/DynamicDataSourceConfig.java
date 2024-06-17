@@ -11,6 +11,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Objects;
 
 @Getter
@@ -30,10 +33,15 @@ public class DynamicDataSourceConfig {
     }
 
     public void setDynamicDataSource(String dbUrl, String dbUsername, String dbPassword, String driverClassName, String namespace) throws Exception {
-        DriverManagerDataSource dataSource = createDataSource(dbUrl, dbUsername, dbPassword, driverClassName);
-        SqlSessionFactory sqlSessionFactory = createSqlSessionFactory(dataSource, namespace);
-        this.dynamicSqlSessionTemplate = new SqlSessionTemplate(Objects.requireNonNull(sqlSessionFactory));
-        updateRepositories();
+        try {
+            validateDatabaseConnection(dbUrl, dbUsername, dbPassword, driverClassName);
+            DriverManagerDataSource dataSource = createDataSource(dbUrl, dbUsername, dbPassword, driverClassName);
+            SqlSessionFactory sqlSessionFactory = createSqlSessionFactory(dataSource, namespace);
+            this.dynamicSqlSessionTemplate = new SqlSessionTemplate(Objects.requireNonNull(sqlSessionFactory));
+            updateRepositories();
+        } catch (Exception e) {
+            throw new Exception("Failed to set dynamic data source", e);
+        }
     }
 
     private DriverManagerDataSource createDataSource(String url, String username, String password, String driverClassName) {
@@ -56,6 +64,20 @@ public class DynamicDataSourceConfig {
         for (String beanName : beanNames) {
             SqlSessionTemplateAware bean = (SqlSessionTemplateAware) applicationContext.getBean(beanName);
             bean.setSqlSessionTemplate(this.dynamicSqlSessionTemplate);
+        }
+    }
+    private void validateDatabaseConnection(String dbUrl, String dbUsername, String dbPassword, String driverClassName) throws SQLException {
+        try {
+            Class.forName(driverClassName);
+            try (Connection connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword)) {
+                if (connection == null || connection.isClosed()) {
+                    throw new SQLException("Invalid database connection");
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver class not found: " + driverClassName, e);
+        } catch (SQLException e) {
+            throw new SQLException("Invalid database connection: " + e.getMessage(), e);
         }
     }
 
