@@ -1,13 +1,21 @@
 package com.example.spectra.service;
 
+import com.example.spectra.dto.IndexDTO;
 import com.example.spectra.dto.MonitoringDTO;
-import com.example.spectra.dto.SecurityDTO;
+import com.example.spectra.repository.dynamic.MonitoringRepository;
+import com.example.spectra.util.Constants;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MonitoringService {
+    private final MonitoringRepository monitoringRepository;
+
+    public MonitoringService(MonitoringRepository monitoringRepository) {
+        this.monitoringRepository = monitoringRepository;
+    }
 
     public MonitoringDTO getDatabaseStatus() {
         return new MonitoringDTO();
@@ -33,8 +41,10 @@ public class MonitoringService {
         return List.of(new MonitoringDTO());
     }
 
-    public List<MonitoringDTO> getUnusedIndexes() {
-        return List.of(new MonitoringDTO());
+    public List<IndexDTO> getUnusedIndexes(Map<String, Object> map, int pageNum) {
+        map.put("limit", Constants.PAGE_SIZE);
+        map.put("offset", (pageNum - 1) * Constants.PAGE_SIZE);
+        return monitoringRepository.getUnusedIndexes(map);
     }
 
     public List<MonitoringDTO> getTop5Indexes() {
