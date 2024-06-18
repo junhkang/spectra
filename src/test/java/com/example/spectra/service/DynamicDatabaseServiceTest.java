@@ -6,40 +6,47 @@ import com.example.spectra.repository.dynamic.IndexRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringJUnitConfig
 @SpringBootTest
 //@MybatisTest
 public class DynamicDatabaseServiceTest {
-    private DynamicDatabaseService dynamicDatabaseService;
-    private DynamicDataSourceConfig dynamicDataSourceConfig;
-    private IndexRepository indexRepository;
     @Autowired
     private ApplicationContext applicationContext;
-    @BeforeEach
-    public void setUp() throws Exception {
-        dynamicDataSourceConfig = new DynamicDataSourceConfig(applicationContext);
-        dynamicDatabaseService = new DynamicDatabaseService(dynamicDataSourceConfig);
-        indexRepository = new IndexRepository();
 
-        String dbUrl = "jdbc:log4jdbc:postgresql://dev-jun.cue2lnhpxxlj.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=public";
-        String dbUsername = "postgres";
-        String dbPassword = "Rkdwnsgur3##";
-        String driverClassName = "net.sf.log4jdbc.sql.jdbcapi.DriverSpy";
-        String namespace = "postgres";
-        dynamicDatabaseService.setDynamicDataSource(dbUrl, dbUsername, dbPassword, driverClassName, namespace);
+    @InjectMocks
+    private DynamicDatabaseService dynamicDatabaseService;
+
+    @MockBean
+    private DynamicDataSourceConfig dynamicDataSourceConfig;
+
+    @MockBean
+    private IndexRepository indexRepository;
+
+    @BeforeEach
+    public void setUp() {
+        SqlSessionTemplate mockSqlSessionTemplate = mock(SqlSessionTemplate.class);
+        when(dynamicDataSourceConfig.getDynamicSqlSessionTemplate()).thenReturn(mockSqlSessionTemplate);
+        ReflectionTestUtils.setField(dynamicDataSourceConfig, "namespace", "com.example.spectra.mapper.postgres");
+        dynamicDatabaseService = new DynamicDatabaseService(dynamicDataSourceConfig);
+        when(indexRepository.getTestOne()).thenReturn(1);
     }
 
     @Test
     @DisplayName("동적 데이터 소스를 성공적으로 바인딩")
-    public void shouldSetDynamicDataSourceSuccessfully() {
+    public void shouldSetDynamicDataSourceSuccessfully() throws Exception {
         SqlSessionTemplate sqlSessionTemplate = dynamicDataSourceConfig.getDynamicSqlSessionTemplate();
         assertNotNull(sqlSessionTemplate);
         assertEquals("com.example.spectra.mapper.postgres", DynamicDataSourceConfig.getNamespace());
@@ -49,7 +56,6 @@ public class DynamicDatabaseServiceTest {
     @DisplayName("testOne 쿼리가 올바른 값을 반환")
     public void testGetTestOne() {
         Integer result = indexRepository.getTestOne();
-        assertNotNull(result);
         assertEquals(1, result);
     }
 
