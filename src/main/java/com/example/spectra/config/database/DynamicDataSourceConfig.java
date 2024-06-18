@@ -40,6 +40,7 @@ public class DynamicDataSourceConfig {
             this.dynamicSqlSessionTemplate = new SqlSessionTemplate(Objects.requireNonNull(sqlSessionFactory));
             updateRepositories();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("Failed to set dynamic data source", e);
         }
     }
@@ -56,6 +57,7 @@ public class DynamicDataSourceConfig {
     private SqlSessionFactory createSqlSessionFactory(DataSource dataSource, String namespace) throws Exception {
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
+        sessionFactoryBean.setTypeAliasesPackage("com.example.spectra.dto");
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/" + namespace + "/*.xml"));
         return sessionFactoryBean.getObject();
     }

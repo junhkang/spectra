@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.spectra.mapper.postgres.MonitoringMapper">
+    <select id="getUnusedIndexes" resultType="indexDTO">
+        SELECT relid         as relId,
+               indexrelid    as indexRelId,
+               schemaname    as schemaName,
+               relname       as relName,
+               indexrelname  as indexRelName,
+               idx_scan      as idxScan,
+               idx_tup_read  as idxTopRead,
+               idx_tup_fetch as idxTupFetch
+        FROM pg_stat_user_indexes
+        WHERE idx_scan = 0
+        ORDER BY indexrelid
+            LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+</mapper>
