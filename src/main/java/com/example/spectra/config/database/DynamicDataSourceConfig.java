@@ -40,7 +40,6 @@ public class DynamicDataSourceConfig {
             this.dynamicSqlSessionTemplate = new SqlSessionTemplate(Objects.requireNonNull(sqlSessionFactory));
             updateRepositories();
         } catch (Exception e) {
-            e.printStackTrace();
             throw new Exception("Failed to set dynamic data source", e);
         }
     }
