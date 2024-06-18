@@ -27,6 +27,7 @@ public class DatabaseConfig {
     public SqlSessionFactory h2SqlSessionFactory(@Qualifier("h2DataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
+        sessionFactory.setTypeAliasesPackage("com.example.spectra.dto");
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:mapper/h2/*.xml"));
         return sessionFactory.getObject();
     }
