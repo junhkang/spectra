@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @AllArgsConstructor
-public class AnalysisRepository {
+public class MaintenanceRepository {
 
-    private static final String namespace = "com.example.spectra.mapper.analysisMapper";
+    private static final String namespace = "com.example.spectra.mapper.MaintenanceMapper";
     private final SqlSession sqlSession;
 
 }
