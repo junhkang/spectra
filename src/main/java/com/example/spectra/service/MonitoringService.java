@@ -47,6 +47,12 @@ public class MonitoringService {
         return monitoringRepository.getUnusedIndexes(map);
     }
 
+    public List<IndexDTO> getAllIndexes(Map<String, Object> map, int pageNum) {
+        map.put("limit", Constants.PAGE_SIZE);
+        map.put("offset", (pageNum - 1) * Constants.PAGE_SIZE);
+        return monitoringRepository.getAllIndexes(map);
+    }
+
     public List<MonitoringDTO> getTop5Indexes() {
         return List.of(new MonitoringDTO());
     }

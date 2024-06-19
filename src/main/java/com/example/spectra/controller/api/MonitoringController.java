@@ -56,6 +56,11 @@ public class MonitoringController {
         return monitoringService.getUnusedIndexes(map, pageNum);
     }
 
+    @GetMapping("/all-indexes")
+    public List<IndexDTO> getAllIndexes(@RequestParam Map<String, Object> map, @RequestParam(defaultValue = "1") int pageNum) {
+        return monitoringService.getAllIndexes(map, pageNum);
+    }
+
     @GetMapping("/top5-indexes")
     public List<MonitoringDTO> getTop5Indexes() {
         return monitoringService.getTop5Indexes();

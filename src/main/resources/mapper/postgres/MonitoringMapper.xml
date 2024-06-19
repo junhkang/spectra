@@ -18,4 +18,10 @@
             LIMIT #{limit} OFFSET #{offset}
     </select>
 
+    <select id="getAllIndexesList" resultType="IndexDTO">
+        SELECT schemaname, tablename, indexname, tablespace, indexdef
+        FROM pg_indexes
+        ORDER BY indexrelid
+             LIMIT #{limit} OFFSET #{offset}
+    </select>
 </mapper>

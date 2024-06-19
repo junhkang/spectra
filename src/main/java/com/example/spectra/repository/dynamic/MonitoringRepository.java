@@ -19,4 +19,8 @@ public class MonitoringRepository implements SqlSessionTemplateAware {
     public List<IndexDTO> getUnusedIndexes(Map<String, Object> map) {
         return sqlSessionTemplate.selectList(DynamicDataSourceConfig.getNamespace() + ".MonitoringMapper.getUnusedIndexes", map);
     }
+
+    public List<IndexDTO> getAllIndexes(Map<String, Object> map) {
+        return sqlSessionTemplate.selectList(DynamicDataSourceConfig.getNamespace() + ".MonitoringMapper.getAllIndexesList", map);
+    }
 }
