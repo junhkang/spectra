@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.spectra.mapper.postgres.MonitoringMapper">
-    <select id="getUnusedIndexes" resultType="indexDTO">
+    <select id="getUnusedIndexes" resultType="indexDTO" parameterType="Map">
         SELECT relid         as relId,
                indexrelid    as indexRelId,
                schemaname    as schemaName,
