@@ -95,5 +95,5 @@ Thumbs.db
 !src/main/resources/**/*
 !src/test/resources/
 !src/test/resources/**/*
-mvnw
-mvnw.cmd
+
+
