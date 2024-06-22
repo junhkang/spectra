@@ -2,6 +2,7 @@ package com.example.spectra.service;
 
 import com.example.spectra.dto.IndexDTO;
 import com.example.spectra.dto.MonitoringDTO;
+import com.example.spectra.dto.QueryDTO;
 import com.example.spectra.repository.dynamic.MonitoringRepository;
 import com.example.spectra.util.Constants;
 import org.springframework.stereotype.Service;
@@ -61,5 +62,11 @@ public class MonitoringService {
 
     public MonitoringDTO getDatabaseSize() {
         return new MonitoringDTO();
+    }
+
+    public List<QueryDTO> getSlowestQueries(Map<String, Object> map, int pageNum) {
+        map.put("limit", Constants.PAGE_SIZE);
+        map.put("offset", (pageNum - 1) * Constants.PAGE_SIZE);
+        return monitoringRepository.getSlowestQueries(map);
     }
 }
