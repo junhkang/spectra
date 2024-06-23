@@ -24,4 +24,19 @@
         ORDER BY indexrelid
              LIMIT #{limit} OFFSET #{offset}
     </select>
+    <select id="getSlowestQueries" resultType="queryDTO" parameterType="Map">
+        SELECT
+            query as query,
+            calls as calls,
+            total_exec_time as total_exec_time,
+            min_exec_time as min_exec_time,
+            mean_exec_time as mean_exec_time,
+            stddev_exec_time as stddev_exec_time,
+            rows as rows
+        FROM
+            pg_stat_statements
+        ORDER BY
+            mean_exec_time DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
 </mapper>

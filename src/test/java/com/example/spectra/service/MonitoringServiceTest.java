@@ -2,6 +2,7 @@ package com.example.spectra.service;
 
 import com.example.spectra.config.database.DynamicDataSourceConfig;
 import com.example.spectra.dto.IndexDTO;
+import com.example.spectra.dto.QueryDTO;
 import com.example.spectra.repository.dynamic.MonitoringRepository;
 import com.example.spectra.util.Constants;
 import org.junit.jupiter.api.BeforeEach;
@@ -55,5 +56,13 @@ public class MonitoringServiceTest {
         Map<String, Object> map = new HashMap<>();
         List<IndexDTO> allIndexesList = monitoringService.getAllIndexes(map, 1);
         assertEquals(allIndexesList.size(), Constants.PAGE_SIZE);
+    }
+
+    @Test
+    @DisplayName("지연쿼리 리스트 정상 조회")
+    public void shouldSelectSlowestQueryList() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        List<QueryDTO> slowQueryList = monitoringService.getSlowestQueries(map, 1);
+        assertEquals(slowQueryList.size(), Constants.PAGE_SIZE);
     }
 }
