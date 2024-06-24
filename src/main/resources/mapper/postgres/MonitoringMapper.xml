@@ -17,6 +17,13 @@
         ORDER BY indexrelid
             LIMIT #{limit} OFFSET #{offset}
     </select>
+
+    <select id="getAllIndexesList" resultType="IndexDTO" parameterType="Map">
+        SELECT schemaname, tablename, indexname, tablespace, indexdef
+        FROM pg_indexes
+        ORDER BY indexrelid
+             LIMIT #{limit} OFFSET #{offset}
+    </select>
     <select id="getSlowestQueries" resultType="queryDTO" parameterType="Map">
         SELECT
             query as query,

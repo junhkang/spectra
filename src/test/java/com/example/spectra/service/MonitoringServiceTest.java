@@ -49,6 +49,15 @@ public class MonitoringServiceTest {
         List<IndexDTO> unusedIndexList = monitoringService.getUnusedIndexes(map, 1);
         assertEquals(unusedIndexList.size(), Constants.PAGE_SIZE);
     }
+
+    @Test
+    @DisplayName("모든 인덱스 리스트 조회")
+    public void shouldSelectAllIndexList() throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        List<IndexDTO> allIndexesList = monitoringService.getAllIndexes(map, 1);
+        assertEquals(allIndexesList.size(), Constants.PAGE_SIZE);
+    }
+
     @Test
     @DisplayName("지연쿼리 리스트 정상 조회")
     public void shouldSelectSlowestQueryList() throws Exception {
