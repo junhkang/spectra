@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
     @GetMapping("/")
     public String showHomePage() {
-        return "dashboard";
+        return "forward:/index.html";
     }
 }
