@@ -2,6 +2,7 @@ package com.example.spectra.controller.api;
 
 import com.example.spectra.dto.IndexDTO;
 import com.example.spectra.dto.MonitoringDTO;
+import com.example.spectra.dto.QueryDTO;
 import com.example.spectra.service.MonitoringService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +55,16 @@ public class MonitoringController {
     @GetMapping("/unused-indexes")
     public List<IndexDTO> getUnusedIndexes(@RequestParam Map<String, Object> map, @RequestParam(defaultValue = "1") int pageNum) {
         return monitoringService.getUnusedIndexes(map, pageNum);
+    }
+
+    @GetMapping("/all-indexes")
+    public List<IndexDTO> getAllIndexes(@RequestParam Map<String, Object> map, @RequestParam(defaultValue = "1") int pageNum) {
+        return monitoringService.getAllIndexes(map, pageNum);
+    }
+
+    @GetMapping("/slowest-queries")
+    public List<QueryDTO> getSlowestQueries(@RequestParam Map<String, Object> map, @RequestParam(defaultValue = "1") int pageNum) {
+        return monitoringService.getSlowestQueries(map, pageNum);
     }
 
     @GetMapping("/top5-indexes")
