@@ -98,4 +98,6 @@ Thumbs.db
 !src/test/resources/
 !src/test/resources/**/*
 
+src/main/frontend/build
+src/main/resources/static
 
