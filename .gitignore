@@ -100,4 +100,5 @@ Thumbs.db
 
 src/main/frontend/build
 src/main/resources/static
+package-lock.json
 
